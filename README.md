@@ -3,6 +3,26 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Reflection
+### Describe the effect each of the P,I,D components had in the implementation
+* Proportional gain
+
+  The proportional portion of the controllers is to reduce the error. Intuitively, it tries to drag the plant back to the expected position. If the proportional gain is too small, the force of controller might not be enough to control the plant. If the proportional gain is too large, even though the direction of the force is right (static stable), but it might lead to overshoot, oscillation or unstable (see video https://github.com/luojunxun/CarNDTerm2Project4PID/blob/master/video/PID_big_P.mp4).
+  
+* Differential gain
+
+  The differential portion of the controllers is to reduce the overshoot, oscillation or make the unstable system to be stable. If the differential gain is too large, system performance would be too slow due to the anti-force of the proportional portion. If the differential gain is too small, in some cases, it might lead to overshoot, oscillation or unstable (see video https://github.com/luojunxun/CarNDTerm2Project4PID/blob/master/video/PID_zero_D.mp4).
+  
+* Integral gain
+
+  The integral portion is to eliminate the static error. Since the integral portion is a kind of system lag, if the integral gain is too large, if might lead to overshoot, oscillation or unstable (see video https://github.com/luojunxun/CarNDTerm2Project4PID/blob/master/video/PID_point_one_I_no_limit_I.mp4).
+
+### Describe how the final hyperparameters were chosen
+I find the final P,I,D gains manually. 
+First, I set gains of I and D to be zeros, and find gain P which is relatively large and the system might have some overshoot, but have fast response to reduce the error.
+Secondly, I add gain D in order to eliminate the overshoot.
+Finally, I add gain I in order to eliminate the static error. In this specific case, I set it to be zero.
+
 ## Dependencies
 
 * cmake >= 3.5
